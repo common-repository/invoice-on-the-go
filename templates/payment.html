@@ -1,0 +1,39 @@
+<div class="rnbt4">
+    <h4>{{invoice.FormattedInvoiceNumber}}</h4>
+    <table class="detail" style="margin-top:20px;width: 100%;">
+        <tr>
+            <th style="width: 55%;">Service</th>
+            <th class="qty" style="width: 15%;">Hrs/Qty</th>
+            <th class="rate" style="width: 15%;">Rate/Price</th>
+            <th class="subTotal" style="width: 15%;">Sub Total</th>
+        </tr>
+        {% for detail in invoice.Detail %}
+        <tr>
+            <td>{{detail.Name}}</td>
+            <td class="qty">{{FormatIntNumber(detail.Qty)}}</td>
+            <td  class="rate">{{FormatNumber(detail.Rate)}}</td>
+            <td class="subTotal">{{FormatNumber(detail.SubTotal)}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <table style="float:right;margin-top:10px;width:300px;" class="detailSummary">
+        <tr>
+            <td style="text-align: right;">Sub Total</td>
+            <td style="text-align: right;">{{FormatNumber(invoice.SubTotal)}}</td>
+        </tr>
+        {% if IsTax ==true%}
+        <tr>
+            <td style="text-align: right;">{{TaxLabel}}</td>
+            <td style="text-align: right;">{{FormatNumber(invoice.Tax)}}</td>
+        </tr>
+        {% endif %}
+        <tr>
+            <td style="text-align: right;background-color:#ededed;"><strong>Total Due</strong></td>
+            <td style="background-color:#ededed;text-align: right;"><strong>{{FormatNumber(invoice.TotalDue)}}</strong></td>
+        </tr>
+    </table>
+
+    <h4 style="margin-top:10px;">Select a payment option</h4>
+    {% include 'payment/payment_main.html' %}
+</div>

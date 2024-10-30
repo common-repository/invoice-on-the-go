@@ -1,0 +1,23 @@
+/* You can add global styles to this file, and also import other style files */
+
+input{
+    transition: border ease-in-out 150ms;
+    border:solid 1px rgb(221, 221, 221);
+}
+
+input.ng-invalid.ng-dirty,
+autocomplete.ng-invalid.ng-dirty input,
+select2.ng-invalid.ng-dirty .select2-selection{
+    border-color:#dc3545;
+
+}
+
+.InvalidMessage{
+    color:#dc3545;
+}
+
+input[type=number]
+{
+    box-shadow:none;
+}
+

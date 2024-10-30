@@ -1,0 +1,26 @@
+<div style="text-align: center">
+    <h2>{{FormatNumber(invoice.TotalDue)}}</h2>
+    <form  action="{{payment.URL}}" target="_blank" method="post">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input name="bn" value="Rednao_SP" type="hidden">
+        <input name="no_shipping" value="1" type="hidden">
+        <input type="hidden" name="currency_code" value="{{payment.Currency}}">
+        <input type="hidden" name="business" value="{{payment.Email}}">
+        <input type="hidden" name="custom" value="{{invoice.Ref}}">
+        <input type="hidden" name="notify_url" value="http://189.244.19.108:9090/smartforms/wp-admin/admin-ajax.php?action=rniotg_paypal_received">
+        <!--<input type="hidden" name="notify_url" value="{{payment.NotificationURL}}">-->
+        {% for item in invoice.Detail %}
+        <input type="hidden" name="item_name" value="{{invoice.FormattedInvoiceNumber}}">
+        <input type="hidden" name="amount" value="{{invoice.TotalDue}}">
+        {% endfor %}
+        <div style="text-align: center;">
+            <button class="btn btn-primary" style="padding:5px 20px;">
+                <span style="margin-right:5px;"><i class="fab fa-paypal"></i></span>Pay Now
+            </button>
+        </div>
+
+
+
+
+    </form>
+</div>

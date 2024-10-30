@@ -1,0 +1,271 @@
+<html>
+    <head>
+        <title>Invoice {{invoice.FormattedInvoiceNumber}}</title>
+        <style>
+            body{
+                font-family: 'Open Sans','Arial','Helvetica',sans-serif;
+            }
+            h4{
+
+                padding:0;
+                margin:0;
+                font-size:20px;
+            }
+
+            p{
+                font-size:16px;
+            }
+
+            .tableAddress td{
+                vertical-align: top;
+            }
+
+            .invoiceSummary td,.detailSummary td{
+                width:200px;
+                border:rgb(204, 204, 204);
+                border-style: solid;
+                border-width: 1px;
+                padding:12px 5px;
+                font-size: 16px;
+                text-align: right;
+            }
+
+            .detail th{
+                background-color:#ededed;
+                padding:16px;
+                font-size: 16px;
+            }
+            .detail td{
+                padding:10px 16px;
+            }
+
+
+            .detail th, .detail td{
+                border:rgb(204, 204, 204);
+                border-style: solid;
+                border-width: 1px;
+            }
+
+            .terms p:last-child,.footer p:last-child{
+                margin:0;
+            }
+
+            .detail .rate, .detail .subTotal,.detail .qty{
+                text-align: right;
+            }
+        </style>
+        <script src="{{baseUrl}}'js/lib/fontawesome-all.min.js'"></script>
+        <link rel="stylesheet" href="{{baseUrl}}'css/bootstrap.css'"/>
+    </head>
+
+
+<body style="background-color: #F2F1EF;">
+    <div class="rnbt4" style="width:1200px;padding:50px 50px 20px 50px;border: 1px solid #aaa;box-shadow: 0 0 20px rgba(0,0,0,0.07);background-color:white;margin:auto;margin-top:50px;">
+        <div>
+            <h1 style="float:left;"><a style="color:#337ab7;text-decoration:none;" target="_blank" href="{{homeUrl}}">{{business.BusinessName}}</a></h1>
+            <h2 style="float:right">Invoice</h2>
+        </div>
+        <div style="width: 100%;clear:both;">
+            <table style="float:right;" class="invoiceSummary">
+                <tr>
+                    <td style="text-align: right;">Invoice Number</td>
+                    <td>{{invoice.FormattedInvoiceNumber}}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;">Invoice Date</td>
+                    <td>{{FormatDate(invoice.CreationDate)}}</td>
+                </tr>
+                <tr>
+                    <td style="text-align: right;background-color:#ededed;"><strong>Total Due</strong></td>
+                    <td style="background-color:#ededed"><strong>{{FormatNumber(invoice.TotalDue)}}</strong></td>
+                </tr>
+            </table>
+            <table class="tableAddress">
+                <tr>
+                    <td colspan="2">
+                        <strong>From:</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <h5 style="color:rgb(51, 122, 183);">{{business.BusinessName}}</h5>
+                    </td>
+                </tr>
+                {% if business.BusinessAddress!= ''%}
+                <tr>
+                    <td>
+                        <i class="fa fa-road" aria-hidden="true" style="margin-right:10px;width:18px;display: inline-block;"></i>
+                    </td>
+                    <td>
+                        <p style="display:inline;padding:0;margin:0;">{{business.BusinessAddress}}</p>
+                    </td>
+                </tr>
+                {% endif %}
+                {% if business.Fax!= ''%}
+                <tr>
+                    <td>
+                        <i class="fa fa-phone" aria-hidden="true" style="margin-right:10px;width:18px;display: inline;"></i>
+                    </td>
+                    <td>
+                        <p style="display:inline;padding:0;margin:0;">{{business.Phone}}<br/>{{business.Fax}}</p>
+                    </td>
+                </tr>
+                {% endif %}
+                {% if business.Email!= ''%}
+                <tr>
+                    <td>
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </td>
+                    <td>
+                        <p style="padding:0;margin:0;">{{business.Email}}</p>
+                    </td>
+                </tr>
+                {% endif %}
+                {% if business.Website!= ''%}
+                <tr>
+                    <td>
+                        <i class="fa fa-link" aria-hidden="true"></i>
+
+                    </td>
+                    <td>
+                        <p style="padding:0;margin:0;">{{business.Website}}</p>
+                    </td>
+                </tr>
+                {% endif %}
+                {% if business.Extra!= ''%}
+                <tr>
+                    <td>
+
+
+                    </td>
+                    <td>
+                        <p style="padding:0;margin:0;">{{business.Extra}}</p>
+                    </td>
+                </tr>
+                {% endif %}
+            </table>
+
+            <table class="tableAddress" style="margin-top:20px;">
+                <tr>
+                    <td colspan="2">
+                        <strong>To:</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <h5 style="color:rgb(51, 122, 183);">{{clientInfo.BusinessName}}</h5>
+                    </td>
+                </tr>
+                {% if business.BusinessAddress!= ''%}
+                <tr>
+                    <td>
+                        <i class="fa fa-road" aria-hidden="true" style="margin-right:10px;width:18px;display: inline-block;"></i>
+                    </td>
+                    <td>
+                        <p style="display:inline;padding:0;margin:0;">{{clientInfo.BusinessAddress}}</p>
+                    </td>
+                </tr>
+                {% endif %}
+                {% if business.Fax!= ''%}
+                <tr>
+                    <td>
+                        <i class="fa fa-phone" aria-hidden="true" style="margin-right:10px;width:18px;display: inline;"></i>
+                    </td>
+                    <td>
+                        <p style="display:inline;padding:0;margin:0;">{{clientInfo.Phone}}<br/>{{clientInfo.Fax}}</p>
+                    </td>
+                </tr>
+                {% endif %}
+                {% if business.Email!= ''%}
+                <tr>
+                    <td>
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </td>
+                    <td>
+                        <p style="padding:0;margin:0;">{{clientInfo.Email}}</p>
+                    </td>
+                </tr>
+                {% endif %}
+                {% if business.Website!= ''%}
+                <tr>
+                    <td>
+                        <i class="fa fa-link" aria-hidden="true"></i>
+
+                    </td>
+                    <td>
+                        <p style="padding:0;margin:0;">{{clientInfo.Website}}</p>
+                    </td>
+                </tr>
+                {% endif %}
+                {% if business.Extra!= ''%}
+                <tr>
+                    <td>
+
+
+                    </td>
+                    <td>
+                        <p style="padding:0;margin:0;">{{clientInfo.Extra}}</p>
+                    </td>
+                </tr>
+                {% endif %}
+            </table>
+        </div>
+        <table class="detail" style="margin-top:20px;width: 100%;">
+            <tr>
+                <th style="width: 55%;">Service</th>
+                <th class="qty" style="width: 15%;">Hrs/Qty</th>
+                <th class="rate" style="width: 15%;">Rate/Price</th>
+                <th class="subTotal" style="width: 15%;">Sub Total</th>
+            </tr>
+            {% for detail in invoice.Detail %}
+            <tr>
+                <td>{{detail.Name}}</td>
+                <td class="qty">{{FormatIntNumber(detail.Qty)}}</td>
+                <td  class="rate">{{FormatNumber(detail.Rate)}}</td>
+                <td class="subTotal">{{FormatNumber(detail.SubTotal)}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <table style="float:right;margin-top:10px;" class="detailSummary">
+            <tr>
+                <td style="text-align: right;">Sub Total</td>
+                <td>{{FormatNumber(invoice.SubTotal)}}</td>
+            </tr>
+            {% if IsTax ==true%}
+            <tr>
+                <td style="text-align: right;">{{TaxLabel}}</td>
+                <td>{{FormatNumber(invoice.Tax)}}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td style="text-align: right;background-color:#ededed;"><strong>Total Due</strong></td>
+                <td style="background-color:#ededed"><strong>{{FormatNumber(invoice.TotalDue)}}</strong></td>
+            </tr>
+            {% if PaymentURL!='' %}
+            <tr>
+                <td style="border:none;" colspan="2"><a href="{{PaymentURL}}" target="_blank">See payment options</a></td>
+            </tr>
+            {% endif %}
+        </table>
+        <div style="clear: both;"></div>
+
+        {% if Terms!= '' %}
+        <div class="terms" style="margin-top:40px;text-align: center;border-top:1px solid #ccc;border-bottom:1px solid #ccc;padding:10px 0;">
+            {{Terms | raw}}
+        </div>
+        {% endif %}
+
+        {% if Footer!= '' %}
+        <div class="footer" style="margin-top:40px;text-align: center;padding:10px 0;">
+            {{Footer | raw}}
+        </div>
+        {% endif %}
+
+
+    </div>
+</body>
+
+
+
+</html>

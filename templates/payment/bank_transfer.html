@@ -1,0 +1,51 @@
+<div style="text-align: center">
+    <h5 style="font-size: 18px;font-weight: bold;margin:0;">You can do the payment on the following accounts</h5>
+    <p>Please use your invoice number as the payment reference</p>
+    <div style="overflow-x: auto;">
+        <table class="table">
+            <tr>
+                {% if payment.ShowAccountName %}
+                <th>Account Name</th>
+                {% endif %}
+                {% if payment.ShowAccountNumber %}
+                <th>Account Number</th>
+                {% endif %}
+                {% if payment.ShowBankName %}
+                <th>Bank Name</th>
+                {% endif %}
+                {% if payment.ShowSortCode %}
+                <th>Sort Code</th>
+                {% endif %}
+                {% if payment.ShowIBAN %}
+                <th>IBAN</th>
+                {% endif %}
+                {% if payment.ShowBicSwift %}
+                <th>BIC/Swift</th>
+                {% endif %}
+            </tr>
+            {% for account in payment.Accounts %}
+            <tr>
+                {% if payment.ShowAccountName %}
+                <td>{{account.AccountName}}</td>
+                {% endif %}
+                {% if payment.ShowAccountNumber %}
+                <td>{{account.AccountNumber}}</td>
+                {% endif %}
+                {% if payment.ShowBankName %}
+                <td>{{account.BankName}}</td>
+                {% endif %}
+                {% if payment.ShowSortCode %}
+                <td>{{account.SortCode}}</td>
+                {% endif %}
+                {% if payment.ShowIBAN %}
+                <td>{{account.IBAN}}</td>
+                {% endif %}
+                {% if payment.ShowBicSwift %}
+                <td>{{account.BICSWIFT}}</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+</div>
